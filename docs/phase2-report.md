@@ -68,16 +68,30 @@ The harness, scorer, and judge are upstream-unmodified (`git diff --stat`: only
 - Upstream note: `rag_naive` with `--embedding_impl langchain` crashes (3-tuple unpack bug);
   we used the working `native` path. Worth filing upstream at Phase 3.
 
-## 6. Phase 2b — in progress
+## 6. Phase 2b — COMPLETE (2026-09-03)
 
-PLUR-only sweeps at the 5 remaining board backbones (deepseek-v4-pro, gpt-5-mini,
-llama-4-maverick, gemini-2.5-flash-lite, gpt-5.4) × 4 domains, judge pinned to gpt-4o.
-Paper baselines already exist per backbone, so these 20 runs complete the full board
-comparison. Balance after top-up: ~$59; floor guard $8 active.
+24 PLUR-only sweep runs across 6 backbones (deepseek-v4-pro, gpt-5-mini, llama-4-maverick,
+gemini-2.5-flash-lite, gpt-5.4, gpt-5.6-sol) × 4 domains, judge pinned to gpt-4o.
+Full table: plur-gatemem `docs/board-comparison.md`. Headlines:
+
+- **PLUR is the #1 external-memory method in 22 of 24 board-comparable backbone×domain
+  cells** (exceptions: household @ GPT-4o-mini vs Mem0; one education cell).
+- Beats Long-Context (full transcript in context) outright in 3 cells, at a fraction of
+  its token cost.
+- Per-backbone MGS means: 4o-mini 13.9 → gemini-lite 19.8 → llama-mav 32.0 →
+  gpt-5.4 42.8 → gpt-5-mini 43.5 → deepseek 46.5 → **gpt-5.6-sol 47.7** (best; not yet
+  on the official board — the paper's newest backbone is gpt-5.4).
+- **gpt-5.6-sol medical: F = 0.0** — zero forgetting failures across all deletion-recovery
+  attacks; the evaluation's first perfect forgetting score. The forgetting axis is PLUR's
+  signature edge at every backbone.
+- Total Phase 2 spend ≈ $75 OpenRouter; ~13.3k judged checkpoints across 32 runs
+  (8 base + 24 sweep). Executional notes in the ledger: repeated laptop network/sleep
+  kills (solved by detaching the runner), one reasoning-token truncation crash (cap
+  raised to 12288, mixed-cap run recorded honestly), two floor-guard pauses.
 
 ## 7. Phase 3 readiness criteria (gate: owner approval)
 
-- [ ] Phase 2b sweeps complete + analyzed vs full board
+- [x] Phase 2b sweeps complete + analyzed vs full board (docs/board-comparison.md)
 - [ ] Decide submission tier and config to publish (likely gpt-5.4 + gpt-4o-mini rows)
 - [ ] Decide whether to land write-time-contradiction / scope-gating fixes and re-run first
 - [ ] Prepare submission artifacts (predictions.jsonl, config, commit, CLI version, token logs)
