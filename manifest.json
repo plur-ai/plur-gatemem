@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-02T23:52:37.245765+00:00",
+ "generated_at": "2026-09-03T00:54:47.403620+00:00",
  "protocol": "docs/protocol.md",
  "environment": {
   "plur_cli_version": "0.16.1",
@@ -478,6 +478,44 @@
     "summary.json": {
      "sha256": "fd00d6ddc38827cc613b2cbfd9aedb9c9c43c495c96212d03a539e86906ae427",
      "bytes": 5576
+    }
+   },
+   "complete": true
+  },
+  "p2b_plur_g5mini_medical": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "openai/gpt-5-mini",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 12288,
+    "retrieval": "PLUR product (BM25 + BGE hybrid via @plur-ai/cli)"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "cf8d89eb922b2ddd2ec4c91d1a7278057c8b0244d5e8ec0ab1b9ff69de614945",
+     "bytes": 26342,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "0e48f62ee2d899db58996a99edae40f6a149eb7514a0d61ad9566beba1ae214b",
+     "bytes": 843423,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "c6e3e757d3cd8fb142a9615d1ba336058a620f2fe108f67c01fb4660baaa1f33",
+     "bytes": 11611,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "5b5a70ef17ee5aafc66271bece5a111cfd5f08ca981628a2bdaefc6fd7fad927",
+     "bytes": 5556
     }
    },
    "complete": true
