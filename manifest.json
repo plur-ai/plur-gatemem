@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-03T09:25:13.960207+00:00",
+ "generated_at": "2026-09-03T11:28:52.631809+00:00",
  "protocol": "docs/protocol.md",
  "environment": {
   "plur_cli_version": "0.16.1",
@@ -482,6 +482,82 @@
    },
    "complete": true
   },
+  "p2b_plur_g25fl_medical": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "google/gemini-2.5-flash-lite",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 12288,
+    "retrieval": "PLUR product (BM25 + BGE hybrid via @plur-ai/cli)"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "a630a648079c991fd4c304253afb10c7fba6ad5c4e9a3eee5b8d64405b36d666",
+     "bytes": 26686,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "30199dd25b9623e7eed94b48889ee52f24d81d8e84f6a84f91f6ce42faa8d1ca",
+     "bytes": 800694,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "e4ce51912d801d683ca710a055b507f98db74537ad8e7be19047a5d382b2caf5",
+     "bytes": 11578,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "f9e0906f22bde912f1485e1ad624fce8f6cb02e31586a44dff2eb391eb1dac48",
+     "bytes": 5562
+    }
+   },
+   "complete": true
+  },
+  "p2b_plur_g25fl_office": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "google/gemini-2.5-flash-lite",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 12288,
+    "retrieval": "PLUR product (BM25 + BGE hybrid via @plur-ai/cli)"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "fff26ff87a127d9020c23d51ee26c2483b34f9c4e827103188c6f1c06b1c4e8c",
+     "bytes": 24415,
+     "rows": 547
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "22ef399bcc8b53e20a970d2fffe58283f4373bb92496d6f965f00920c066d79c",
+     "bytes": 1042919,
+     "rows": 547
+    },
+    "scores.jsonl.gz": {
+     "sha256": "43f64bc67c0e5271031772fa1468182f2fb10c61bb2dec19649816967329635c",
+     "bytes": 10869,
+     "rows": 547
+    },
+    "summary.json": {
+     "sha256": "6b981e4972ca8b5bce43cd52d902614c83a557a4c39de2542a70f541a1e228a2",
+     "bytes": 5552
+    }
+   },
+   "complete": true
+  },
   "p2b_plur_g5mini_education": {
    "config": {
     "harness_config": "configs/runs/paper_main.yaml",
@@ -630,6 +706,82 @@
     "summary.json": {
      "sha256": "a89a5b77ff241ff20ce0b19941961469b3565a440f078bc3e2eca1bc2ed35dd9",
      "bytes": 5560
+    }
+   },
+   "complete": true
+  },
+  "p2b_plur_llmav_education": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "meta-llama/llama-4-maverick",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 12288,
+    "retrieval": "PLUR product (BM25 + BGE hybrid via @plur-ai/cli)"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "1a02c2fde62ac11fdf188456ee13435b6e556f8f63106c46e6be8080624b2e99",
+     "bytes": 23963,
+     "rows": 540
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "eab061b4e132fcf36802924206e4bdcc3f1f4e530a62f0b0ff4a03f1b9120917",
+     "bytes": 818904,
+     "rows": 540
+    },
+    "scores.jsonl.gz": {
+     "sha256": "0e62781549ac2cc603a153b08d4794a33d11c949fe48c017b6b7c6eba01d5e8b",
+     "bytes": 11283,
+     "rows": 540
+    },
+    "summary.json": {
+     "sha256": "779e191828a07eab83d61534657e79cea925212c29869f781f24a8d5e7158934",
+     "bytes": 5428
+    }
+   },
+   "complete": true
+  },
+  "p2b_plur_llmav_household": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "meta-llama/llama-4-maverick",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 12288,
+    "retrieval": "PLUR product (BM25 + BGE hybrid via @plur-ai/cli)"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "d27da4baa0a20c8c8479efdf9c33e79901f502c720efe5f6d07f269d42cc707f",
+     "bytes": 24946,
+     "rows": 552
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "05f2676b1bbdbaa4701c9f4e675a0bed690b319f9b67480425cc91fa1a657479",
+     "bytes": 1032514,
+     "rows": 552
+    },
+    "scores.jsonl.gz": {
+     "sha256": "efbedfd8b02fc1db748bcc81063d9170e9eb199258e636a672b5976a95284300",
+     "bytes": 11889,
+     "rows": 552
+    },
+    "summary.json": {
+     "sha256": "e541073a37faba652454ee86d76141d1c5e5f0ea4a0b60cf3ad8620c89888e51",
+     "bytes": 5577
     }
    },
    "complete": true
