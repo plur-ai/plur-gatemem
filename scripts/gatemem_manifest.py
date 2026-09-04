@@ -45,6 +45,23 @@ FAMILY_CONFIG = {
                      "retrieval": "embedding (native), sentence-transformers/all-MiniLM-L6-v2"},
     "p2b_plur": {**BASE_CONFIG, "agent": "plur", "max_output_tokens": 12288,
                  "retrieval": "PLUR product (BM25 + BGE hybrid via @plur-ai/cli)"},
+    "h_amem": {**BASE_CONFIG, "agent": "a_mem", "max_output_tokens": 12288,
+               "retrieval": "embedding (native), all-MiniLM-L6-v2",
+               "purpose": "hardening: baseline head-to-head in our environment"},
+    "h_plur": {**BASE_CONFIG, "agent": "plur", "max_output_tokens": 12288,
+               "retrieval": "PLUR product", "purpose": "hardening: second seed"},
+    "h_mem0": {**BASE_CONFIG, "agent": "mem0", "max_output_tokens": 12288,
+               "purpose": "hardening head-to-head — INVALID RUN: U=0, over-refusal 100%; "
+                          "mem0 upstream produced no usable memories in this environment; "
+                          "excluded from all claims"},
+    "ab_v2extract": {**BASE_CONFIG, "agent": "plur", "max_output_tokens": 4096,
+                     "env": "PLUR_INGEST_MODE=extract",
+                     "purpose": "v2 A/B — NEGATIVE RESULT: mini-model extraction at ingest "
+                                "lowered U and MGS in both tested domains; not adopted"},
+    "ab_v2deletion": {**BASE_CONFIG, "agent": "plur", "max_output_tokens": 4096,
+                      "env": "PLUR_DELETION_SEMANTIC_TOPK=2",
+                      "purpose": "v2 A/B — noise-level (+0.3 MGS, within ±3 seed variance); "
+                                 "not adopted for v1 submission"},
 }
 
 BACKBONE_TAGS = {

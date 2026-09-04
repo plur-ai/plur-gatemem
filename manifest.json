@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-03T17:55:14.580052+00:00",
+ "generated_at": "2026-09-04T17:51:56.736453+00:00",
  "protocol": "docs/protocol.md",
  "environment": {
   "plur_cli_version": "0.16.1",
@@ -24,6 +24,278 @@
   "household/checkpoints.jsonl": "4692c3e1ea91be63debd7b39ccc5fc425bc1a83155c1bfb5c197ba68cefd93ae"
  },
  "runs": {
+  "ab_v2deletion_medical": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "openai/gpt-4o-mini",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 4096,
+    "env": "PLUR_DELETION_SEMANTIC_TOPK=2",
+    "purpose": "v2 A/B \u2014 noise-level (+0.3 MGS, within \u00b13 seed variance); not adopted for v1 submission"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "0840a969e80e1ff3687ad7d7e5b4e46e5fda72e1b162b5f5bccaaa89e8fd61e1",
+     "bytes": 25565,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "23887424ff69792d6f873d7d184a749dbd118dbc3984ce63fe7358d67577743b",
+     "bytes": 866886,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "2902388c838d0df56edecc4cda7be711939a0b5dbe37dd0475f5f5c65ab7af12",
+     "bytes": 12255,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "5c5c24a4bbf264aef963fd96885ff73660649d8b4813d61da27c7c551fcbe8af",
+     "bytes": 5574
+    }
+   },
+   "complete": true
+  },
+  "ab_v2extract_household": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "openai/gpt-4o-mini",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 4096,
+    "env": "PLUR_INGEST_MODE=extract",
+    "purpose": "v2 A/B \u2014 NEGATIVE RESULT: mini-model extraction at ingest lowered U and MGS in both tested domains; not adopted"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "3ae3580b67bf44d21100f9e563c90532fc16ca2bde447f5de2a579b9f850e179",
+     "bytes": 24374,
+     "rows": 552
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "fe8fc96102e58cc390732bdffffb01f0f850a27af40560f2a51ca7860a3a63bc",
+     "bytes": 799526,
+     "rows": 552
+    },
+    "scores.jsonl.gz": {
+     "sha256": "2fa2cf49b81b6fa28a34db1ee940e60df63eb7711a0bb65477447eadab48c674",
+     "bytes": 12350,
+     "rows": 552
+    },
+    "summary.json": {
+     "sha256": "1c54ea1550b705b8598ee775d8af3929e084030125765fa4e999538e69650e96",
+     "bytes": 5585
+    }
+   },
+   "complete": true
+  },
+  "ab_v2extract_medical": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "openai/gpt-4o-mini",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 4096,
+    "env": "PLUR_INGEST_MODE=extract",
+    "purpose": "v2 A/B \u2014 NEGATIVE RESULT: mini-model extraction at ingest lowered U and MGS in both tested domains; not adopted"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "100674098398bead91cf9618198c53f1fcc156bb22fa002f8776e6a4407dbea7",
+     "bytes": 25689,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "85296764ab271110bd7644547e88db4b95606611a4a9264d7753b9fbe0afb41d",
+     "bytes": 624809,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "f53e7bad53d6dc65ec6e516bb4471e63c141de85fd7ca8a289084e87ced630c2",
+     "bytes": 11946,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "3104f1a6eb9ff60c3b3fbe982d82a0ff2e5c089da3d591054fbfa3f779377c90",
+     "bytes": 5543
+    }
+   },
+   "complete": true
+  },
+  "h_amem_dsv4_medical": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "openai/gpt-4o-mini",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "a_mem",
+    "max_output_tokens": 12288,
+    "retrieval": "embedding (native), all-MiniLM-L6-v2",
+    "purpose": "hardening: baseline head-to-head in our environment"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "cd6123e5cf1e4b7cde2dc6e740ad9d4d17fd7149b4a89fbcd53535053406d22b",
+     "bytes": 25273,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "0440e221b0c237831f37dd96a32ad4250fa9bc657e60e57cd5451e5656ce5464",
+     "bytes": 2662936,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "689c970354514806d187038ee4dfd18bfcfd398d264f2e060db95eca4fb71e82",
+     "bytes": 11990,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "257856d680f10f008e9accfaaa80a9a10594dccdd6880eda4dd0eca92c27212b",
+     "bytes": 5583
+    }
+   },
+   "complete": true
+  },
+  "h_amem_g54_medical": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "openai/gpt-4o-mini",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "a_mem",
+    "max_output_tokens": 12288,
+    "retrieval": "embedding (native), all-MiniLM-L6-v2",
+    "purpose": "hardening: baseline head-to-head in our environment"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "694cb24a6f649933c9e39bfeb6e8b5b4458aa98458ee4505931b1fdcbae4c3d6",
+     "bytes": 25853,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "7df302894713027c81db118bb6a8688949f7e62a493be5c11fcf3dff4cf4d039",
+     "bytes": 2646677,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "707c940599f579e5c8d52e6a4000991bc0bd5fdd41151c06c4bfd261a5f555cd",
+     "bytes": 12250,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "122d9076936d7298220c8c374728ae029a122050589541083ea2069e763119ea",
+     "bytes": 5406
+    }
+   },
+   "complete": true
+  },
+  "h_mem0_4omini_household": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "openai/gpt-4o-mini",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "mem0",
+    "max_output_tokens": 12288,
+    "purpose": "hardening head-to-head \u2014 INVALID RUN: U=0, over-refusal 100%; mem0 upstream produced no usable memories in this environment; excluded from all claims"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "485c0a8212878164fa767966ccc55be4c89bb5947067a9df249ae954b443c89d",
+     "bytes": 22792,
+     "rows": 552
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "e628abbaff9dcbd9039b7cebacba322fc57816eb5906975621926bc7ea3722aa",
+     "bytes": 80143,
+     "rows": 552
+    },
+    "scores.jsonl.gz": {
+     "sha256": "c3a0c81ac7c5edf68ddb3cd9a002c877fb3b17794c6aac82a26be0e1d963aa8c",
+     "bytes": 9333,
+     "rows": 552
+    },
+    "summary.json": {
+     "sha256": "cc469616f67eff5a448e34804e90558030908cd5a4be27cdf0fdc326c43a62bb",
+     "bytes": 5190
+    }
+   },
+   "complete": true
+  },
+  "h_plur_dsv4_medical_seed2": {
+   "config": {
+    "harness_config": "configs/runs/paper_main.yaml",
+    "answer_model": "openai/gpt-4o-mini",
+    "judge_model": "openai/gpt-4o",
+    "temperature": 0.2,
+    "judge_temperature": 0.0,
+    "top_k": 20,
+    "answer_protocol": "standard",
+    "serving": "OpenRouter (https://openrouter.ai/api/v1)",
+    "serving_caveat": "openai/* models are served by OpenAI via OpenRouter; deepseek/meta-llama/google models may be routed across multiple upstream providers by OpenRouter \u2014 provider not pinned, recorded as a reproducibility caveat.",
+    "agent": "plur",
+    "max_output_tokens": 12288,
+    "retrieval": "PLUR product",
+    "purpose": "hardening: second seed"
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "c675d8040fb626b75128097cf30809a03a59d4cce92680a288c0e0a807331c80",
+     "bytes": 25107,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "18a4aa6e18380617f839a8dbbd1692795f39a627186fecb4550a25664e819c42",
+     "bytes": 853147,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "34a1304ee047eb8477cbbca59e2a5e7de1dbb513a91a690a2166b669cc335ace",
+     "bytes": 11845,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "874d0c6e847b521f49a2eee079a3cfa51abe5c775ccde3dffbb8fda0d14bd709",
+     "bytes": 5561
+    }
+   },
+   "complete": true
+  },
   "p2_plur_education": {
    "config": {
     "harness_config": "configs/runs/paper_main.yaml",

@@ -99,6 +99,23 @@ class PlurAgent(BaseMemoryAgent):
         self._counters: Dict[str, int] = {}
         self._forget_log: List[Dict[str, Any]] = []
 
+        # ---- v2 options (env-gated; defaults reproduce v1 exactly) ----
+        # PLUR_INGEST_MODE=extract  -> distill turn windows into atomic facts
+        #   via the run's answer LLM before plur.learn (mirrors real PLUR
+        #   usage, where the agent distills before learning).
+        # PLUR_DELETION_SEMANTIC_TOPK=N -> additionally retire the top-N
+        #   hybrid-recall near-matches per deletion target (paraphrase
+        #   residue that lexical matching misses). 0 disables (v1).
+        self.ingest_mode = os.environ.get("PLUR_INGEST_MODE", "raw").strip().lower()
+        if self.ingest_mode not in {"raw", "extract"}:
+            raise ValueError("PLUR_INGEST_MODE must be raw|extract")
+        try:
+            self.deletion_semantic_topk = int(os.environ.get("PLUR_DELETION_SEMANTIC_TOPK", "0"))
+        except ValueError:
+            self.deletion_semantic_topk = 0
+        self._extract_window = int(os.environ.get("PLUR_EXTRACT_WINDOW", "8"))
+        self._turn_buffer: List[Turn] = []
+
     # ------------------------------------------------------------------ reset
 
     def reset(self, episode: Dict[str, Any]) -> None:
@@ -120,8 +137,12 @@ class PlurAgent(BaseMemoryAgent):
             "engrams_forgotten": 0,
             "forget_errors": 0,
             "recall_errors": 0,
+            "extraction_calls": 0,
+            "extraction_fallbacks": 0,
+            "semantic_forgets": 0,
         }
         self._forget_log = []
+        self._turn_buffer = []
 
     # ----------------------------------------------------------------- ingest
 
@@ -132,12 +153,25 @@ class PlurAgent(BaseMemoryAgent):
             return
 
         if self.deletion_mode == "heuristic" and self._is_deletion_request(turn):
+            # Flush pending extraction first so deletion targets exist as
+            # engrams before we try to retire them.
+            self._flush_extract_buffer()
             self._counters["deletion_turns"] += 1
             self._handle_deletion(turn)
             # Deletion-request turns are never stored: they contain the very
             # values being deleted, and storing them would defeat retirement.
             return
 
+        if self.ingest_mode == "extract" and self.llm_router is not None:
+            self._turn_buffer.append(turn)
+            if len(self._turn_buffer) >= self._extract_window:
+                self._flush_extract_buffer()
+            return
+
+        self._learn_raw_turn(turn)
+
+    def _learn_raw_turn(self, turn: Turn) -> None:
+        text = (turn.text or "").strip()
         speaker = f"{turn.speaker_principal_id} ({turn.speaker_role})"
         stamp = f"[{turn.timestamp}] " if turn.timestamp else ""
         statement = f"{stamp}{speaker}: {text}"
@@ -152,6 +186,64 @@ class PlurAgent(BaseMemoryAgent):
         except Exception as e:
             self._counters["learn_errors"] += 1
             self.logger.warning("plur learn failed on %s: %s", turn.turn_id, e)
+
+    # ------------------------------------------------------- v2: extraction
+
+    _EXTRACT_SYSTEM = (
+        "You distill dialogue into atomic memory facts for an assistant's "
+        "long-term store. From the window of turns, extract every "
+        "self-contained factual statement worth remembering: facts, "
+        "preferences, contact details, schedules, policies, identifiers, "
+        "instructions, and status changes. Each fact must name who said it "
+        "(principal id and role) and stand alone without the window. Keep "
+        "concrete values (names, numbers, dates) verbatim. Skip greetings "
+        "and filler. Output STRICT JSON: an array of objects with keys "
+        '"fact" (string) and "turn_id" (the source turn id). No other text.'
+    )
+
+    def _flush_extract_buffer(self) -> None:
+        if not self._turn_buffer:
+            return
+        window = self._turn_buffer
+        self._turn_buffer = []
+        lines = []
+        for t in window:
+            stamp = f"[{t.timestamp}] " if t.timestamp else ""
+            lines.append(f"{t.turn_id} {stamp}{t.speaker_principal_id} ({t.speaker_role}): {t.text}")
+        user_prompt = "Turns:\n" + "\n".join(lines)
+        facts: List[Dict[str, Any]] = []
+        try:
+            self._counters["extraction_calls"] += 1
+            out = self.llm_router.complete(
+                system_prompt=self._EXTRACT_SYSTEM, user_prompt=user_prompt
+            )
+            start, end = out.find("["), out.rfind("]")
+            if start >= 0 and end > start:
+                import json as _json
+
+                parsed = _json.loads(out[start : end + 1])
+                facts = [f for f in parsed if isinstance(f, dict) and f.get("fact")]
+        except Exception as e:
+            self.logger.warning("extraction failed, falling back to raw turns: %s", e)
+        if not facts:
+            # Honest fallback: never silently drop content on extractor failure.
+            self._counters["extraction_fallbacks"] += 1
+            for t in window:
+                self._learn_raw_turn(t)
+            return
+        by_id = {t.turn_id: t for t in window}
+        for f in facts:
+            src = by_id.get(str(f.get("turn_id")))
+            tags = [f"turn:{f.get('turn_id')}"]
+            if src is not None:
+                tags += [f"principal:{src.speaker_principal_id}", f"role:{src.speaker_role}"]
+            try:
+                self.plur.learn(str(f["fact"]), type="procedural", tags=tags,
+                                source=str(f.get("turn_id") or ""))
+                self._counters["engrams_written"] += 1
+            except Exception as e:
+                self._counters["learn_errors"] += 1
+                self.logger.warning("plur learn (fact) failed: %s", e)
 
     # --------------------------------------------------------------- deletion
 
@@ -203,6 +295,22 @@ class PlurAgent(BaseMemoryAgent):
                     # No extractable values: retire only the top lexical hit.
                     candidate_ids[hid] = "topical"
                     break
+        # v2: semantic widening — paraphrases of deleted facts survive lexical
+        # matching; retire the top-K hybrid near-matches per target as well.
+        if self.deletion_semantic_topk > 0 and targets:
+            for q in targets:
+                try:
+                    sem = self.plur.recall_hybrid(q, limit=self.deletion_semantic_topk) or []
+                except Exception as e:
+                    self._counters["recall_errors"] += 1
+                    self.logger.warning("plur recall_hybrid (deletion) failed: %s", e)
+                    continue
+                for h in sem[: self.deletion_semantic_topk]:
+                    hid = h.get("id")
+                    if hid and hid not in candidate_ids:
+                        candidate_ids[hid] = f"semantic:{q[:40]}"
+                        self._counters["semantic_forgets"] += 1
+
         for hid, matched in candidate_ids.items():
             try:
                 plur_run_json(
@@ -222,6 +330,8 @@ class PlurAgent(BaseMemoryAgent):
     # ------------------------------------------------------------------ query
 
     def query(self, checkpoint: Checkpoint) -> Dict[str, Any]:
+        # Extraction mode buffers turns; a checkpoint may fire mid-window.
+        self._flush_extract_buffer()
         retrieved: List[Dict[str, Any]] = []
         try:
             hits = self.plur.recall_hybrid(checkpoint.query_text, limit=self.top_k) or []
@@ -250,4 +360,9 @@ class PlurAgent(BaseMemoryAgent):
         dbg["agent"] = "plur"
         dbg["counters"] = dict(self._counters)
         dbg["n_retrieved"] = len(retrieved)
+        dbg["v2_config"] = {
+            "ingest_mode": self.ingest_mode,
+            "deletion_semantic_topk": self.deletion_semantic_topk,
+            "extract_window": self._extract_window,
+        }
         return out
