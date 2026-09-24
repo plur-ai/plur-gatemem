@@ -38,9 +38,14 @@ def main() -> None:
     ap.add_argument("--contact", default="dev@plur.ai")
     ap.add_argument("--code-url", required=True)
     ap.add_argument("--submit", action="store_true")
+    ap.add_argument("--only", action="append", help="submit only these runs (repeatable)")
     args = ap.parse_args()
 
     rows = plan(args.tag)
+    if args.only:
+        rows = [r for r in rows if r["run"] in args.only]
+        if not rows:
+            raise SystemExit(f"no runs match {args.only}")
     for r in rows:
         print(f"{'ok ' if r['ok'] else 'BAD'} {r['run']:<26} {r['backbone']:<22} {r['domain']:<10} {r['n']} checkpoints")
     bad = [r for r in rows if not r["ok"]]
