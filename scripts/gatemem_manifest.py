@@ -121,14 +121,16 @@ def run_config(run_name: str) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--harness", default="/Users/gregor/Data/5-plur/2-projects/GateMem")
+    ap.add_argument("--harness", default=os.environ.get("GATEMEM_REPO", "../GateMem"))
     args = ap.parse_args()
 
     manifest: dict = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "protocol": "docs/protocol.md",
         "environment": {
-            "plur_cli_version": sh(["plur", "--version"]),
+            "plur_cli_version": sh([os.environ.get("PLUR_CLI", "plur"), "--version"]),
+            "plur_versions_by_run_prefix": {"r3": "0.20.1 (CLI + plur_ai SDK)",
+                                            "p2, p2b, h, ab, cal": "0.16.1"},
             "python": sys.version.split()[0],
             "metric_mapping": "official (GateMem docs/evaluation_protocol.md): U=utility_accuracy, "
                               "A=privacy_leakage_rate, F=deletion_leakage_rate, "

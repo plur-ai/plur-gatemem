@@ -1,0 +1,145 @@
+{
+  "n_checkpoints": 552,
+  "n_utility": 184,
+  "n_utility_scored": 184,
+  "n_privacy": 184,
+  "n_privacy_scored": 184,
+  "n_privacy_context_scored": 184,
+  "n_privacy_e2e_scored": 184,
+  "n_safety": 184,
+  "n_safety_scored": 184,
+  "n_safety_context_scored": 184,
+  "n_safety_e2e_scored": 184,
+  "action_accuracy": 0.24818840579710144,
+  "utility_accuracy": 0.20108695652173914,
+  "privacy_leakage_rate": 0.11956521739130435,
+  "deletion_leakage_rate": 0.125,
+  "privacy_answer_leakage_rate": 0.11956521739130435,
+  "deletion_answer_leakage_rate": 0.125,
+  "privacy_context_leakage_rate": 0.9619565217391305,
+  "deletion_context_leakage_rate": 0.967391304347826,
+  "privacy_e2e_leakage_rate": 0.9728260869565217,
+  "deletion_e2e_leakage_rate": 0.967391304347826,
+  "over_refusal_rate": 0.6902173913043478,
+  "compliance_utility_score": 0.15491345699432893,
+  "compliance_utility_e2e_score": 0.0001781843305662861,
+  "metric_semantics": {
+    "privacy_leakage_rate": "answer-level privacy leakage in final output",
+    "deletion_leakage_rate": "answer-level deletion/staleness leakage in final output",
+    "privacy_context_leakage_rate": "privacy leakage in memory context exposed to the answer model",
+    "deletion_context_leakage_rate": "deleted/stale content in memory context exposed to the answer model",
+    "privacy_e2e_leakage_rate": "privacy answer leak OR privacy context exposure",
+    "deletion_e2e_leakage_rate": "deletion answer leak OR deletion context exposure"
+  },
+  "gated_by_action": false,
+  "runtime": {
+    "total_s": 2660.840723405592,
+    "ingest_s": 807.967804587679,
+    "query_s": 1852.8729188179132,
+    "avg_total_s_per_ckpt": 4.820363629357956
+  },
+  "llm": {
+    "latency_s_total": 1426.8383453732822,
+    "tokens": {
+      "input_tokens": 1146916,
+      "output_tokens": 33157,
+      "total_tokens": 1180073,
+      "avg_total_tokens_per_ckpt": 2137.8134057971015
+    }
+  },
+  "rule_based": {
+    "n_checkpoints": 552,
+    "n_utility": 184,
+    "n_utility_scored": 184,
+    "n_privacy": 184,
+    "n_privacy_scored": 184,
+    "n_privacy_context_scored": 184,
+    "n_privacy_e2e_scored": 184,
+    "n_safety": 184,
+    "n_safety_scored": 184,
+    "n_safety_context_scored": 184,
+    "n_safety_e2e_scored": 184,
+    "action_accuracy": 0.24818840579710144,
+    "utility_accuracy": 0.125,
+    "privacy_leakage_rate": 0.13043478260869565,
+    "deletion_leakage_rate": 0.059782608695652176,
+    "privacy_answer_leakage_rate": 0.13043478260869565,
+    "deletion_answer_leakage_rate": 0.059782608695652176,
+    "privacy_context_leakage_rate": 0.9619565217391305,
+    "deletion_context_leakage_rate": 0.967391304347826,
+    "privacy_e2e_leakage_rate": 0.967391304347826,
+    "deletion_e2e_leakage_rate": 0.967391304347826,
+    "over_refusal_rate": 0.6902173913043478,
+    "compliance_utility_score": 0.10219754253308128,
+    "compliance_utility_e2e_score": 0.0001329158790170135,
+    "metric_semantics": {
+      "privacy_leakage_rate": "answer-level privacy leakage in final output",
+      "deletion_leakage_rate": "answer-level deletion/staleness leakage in final output",
+      "privacy_context_leakage_rate": "privacy leakage in memory context exposed to the answer model",
+      "deletion_context_leakage_rate": "deleted/stale content in memory context exposed to the answer model",
+      "privacy_e2e_leakage_rate": "privacy answer leak OR privacy context exposure",
+      "deletion_e2e_leakage_rate": "deletion answer leak OR deletion context exposure"
+    },
+    "gated_by_action": false,
+    "runtime": {
+      "total_s": 2660.840723405592,
+      "ingest_s": 807.967804587679,
+      "query_s": 1852.8729188179132,
+      "avg_total_s_per_ckpt": 4.820363629357956
+    },
+    "llm": {
+      "latency_s_total": 1426.8383453732822,
+      "tokens": {
+        "input_tokens": 1146916,
+        "output_tokens": 33157,
+        "total_tokens": 1180073,
+        "avg_total_tokens_per_ckpt": 2137.8134057971015
+      }
+    }
+  },
+  "llm_judge": {
+    "n_judged": 552,
+    "n_action_scored": 552,
+    "n_utility": 184,
+    "n_utility_scored": 184,
+    "n_privacy": 184,
+    "n_privacy_scored": 184,
+    "n_safety": 184,
+    "n_safety_scored": 184,
+    "judge_action_ok_rate": 0.24818840579710144,
+    "judge_utility_accuracy": 0.4782608695652174,
+    "judge_effective_utility_accuracy": 0.20108695652173914,
+    "judge_privacy_leakage_rate": 0.11956521739130435,
+    "judge_deletion_leakage_rate": 0.125,
+    "judge_parse_failure_rate": 0.0,
+    "judge_parse_failure_rate_by_query_type": {
+      "utility": 0.0,
+      "privacy": 0.0,
+      "safety": 0.0
+    },
+    "gated_by_action": false,
+    "llm": {
+      "latency_s_total": 814.5824835619424,
+      "tokens": {
+        "input_tokens": 468074,
+        "output_tokens": 20876,
+        "total_tokens": 488950,
+        "avg_total_tokens_per_case": 885.7789855072464
+      },
+      "provider": "openai",
+      "model": "openai/gpt-4o"
+    },
+    "prompt_path": "/Users/gregor/Data/5-plur/2-projects/GateMem/bench/prompts/judge_prompt.txt",
+    "context_aware": {
+      "n_privacy_context_scored": 184,
+      "n_safety_context_scored": 184,
+      "privacy_context_leakage_rate": 0.9619565217391305,
+      "deletion_context_leakage_rate": 0.967391304347826,
+      "privacy_e2e_leakage_rate": 0.9728260869565217,
+      "deletion_e2e_leakage_rate": 0.967391304347826,
+      "compliance_utility_e2e_score": 0.0001781843305662861,
+      "context_metric_source": "rule_based_prompt_context_scan"
+    }
+  },
+  "context_metric_source": "rule_based_prompt_context_scan"
+}

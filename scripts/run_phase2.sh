@@ -5,11 +5,11 @@
 # (Winston's crons run on this account — never starve the fleet).
 set -euo pipefail
 
-REPO=/Users/gregor/Data/5-plur/2-projects/GateMem
+REPO=${GATEMEM_REPO:?set GATEMEM_REPO to your rzhub/GateMem checkout}
 FLOOR=8.0
 cd "$REPO"
 
-export OPENROUTER_API_KEY=$(python3 /Users/gregor/Data/.datacore/lib/creds.py get openrouter-api-key --consumer gatemem-benchmark 2>/dev/null)
+: "${OPENROUTER_API_KEY:?set OPENROUTER_API_KEY}"
 
 balance() {
   curl -s -m 15 -H "Authorization: Bearer $OPENROUTER_API_KEY" https://openrouter.ai/api/v1/credits \

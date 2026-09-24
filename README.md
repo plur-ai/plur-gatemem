@@ -38,7 +38,7 @@ reasoning backbones need `--max_output_tokens` ≥ 12288 or responses truncate t
 
 ## Status
 
-- Phase 2 base (2 agents × 4 domains, GPT-4o-mini): **complete** — see `docs/phase2-report.md`.
-- Phase 2b (PLUR × 6 backbones × 4 domains): **in progress**; outputs land here as runs
-  complete. Interim: PLUR is the top external-memory method on Medical and Office at
-  Deepseek-V4-Pro (MGS 47.6 / 57.5) vs the official board's published baselines.
+- Phase 2 base and 2b backbone sweeps (PLUR 0.16.1): complete. See `docs/phase2-report.md` and `docs/board-comparison.md`.
+- **Leaderboard submission (PLUR 0.20.1):** the `r3_plur_*` runs cover the three backbones the GateMem-Submit form lists (GPT-4o-mini, GPT-5-mini, Gemini-2.5-Flash-Lite) × 4 domains. The uploaded files are in `submission/`, built by `scripts/gatemem_build_submission.py` and sent by `scripts/gatemem_submit.py`.
+- Frontier backbones (medical only, not on the leaderboard): `r3_plur_opus55_medical`, `r3_plur_astra6_medical`.
+- Run ledger and honesty protocol: `docs/protocol.md`.

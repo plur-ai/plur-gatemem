@@ -1,14 +1,19 @@
 {
- "generated_at": "2026-09-04T17:51:56.736453+00:00",
+ "generated_at": "2026-09-24T07:08:14.738859+00:00",
  "protocol": "docs/protocol.md",
  "environment": {
-  "plur_cli_version": "0.16.1",
+  "plur_cli_version": "0.20.1",
+  "plur_versions_by_run_prefix": {
+   "r3": "0.20.1 (CLI + plur_ai SDK)",
+   "p2, p2b, h, ab, cal": "0.16.1"
+  },
   "python": "3.11.1",
   "metric_mapping": "official (GateMem docs/evaluation_protocol.md): U=utility_accuracy, A=privacy_leakage_rate, F=deletion_leakage_rate, MGS=compliance_utility_score",
   "gatemem_commit": "603f9f4b4ba4b77f043c20f85687fa016fd720b0",
   "gatemem_origin": "https://github.com/rzhub/GateMem.git",
   "gatemem_local_changes": [
    "M bench/agents/__init__.py",
+   "?? .plur-cli/",
    "?? bench/agents/plur_agent.py",
    "?? bench/data/medical_slice/"
   ]
@@ -1510,6 +1515,384 @@
     "summary.json": {
      "sha256": "9407f882fd2455cb95792bd4001c7eed5f2ac6cf67ba1f44ab5027f626ded045",
      "bytes": 5582
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_4omini_education": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "97dba27af5c53422b20f7a33d18ec792573d724c0bddd94d3cd8f61f81ab1d41",
+     "bytes": 22497,
+     "rows": 540
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "78e88c6a5af5a3709389e0346e781ea174986346060c7b2e949ebd373048fe09",
+     "bytes": 756229,
+     "rows": 540
+    },
+    "scores.jsonl.gz": {
+     "sha256": "5172cbd09d701db954a67ba26489442971a8fa7213fb51e56246e336f0dbad4b",
+     "bytes": 10789,
+     "rows": 540
+    },
+    "summary.json": {
+     "sha256": "80c0268a144fa706a82789cdf0c9c236ba9f9d1400f0b001c628883ca13e02cf",
+     "bytes": 5573
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_4omini_household": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "f386e39b522cb3c19ab4a987a24714a18e238f51c2c18a2a9af139fd94ac5d2b",
+     "bytes": 24018,
+     "rows": 552
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "e3533bdf2d18b9bb693d02eab6a96a70ac3ea5dbc5f38730a6498a21a3f8857f",
+     "bytes": 896500,
+     "rows": 552
+    },
+    "scores.jsonl.gz": {
+     "sha256": "df3e5c20016e1e4b7b7b09552c23707124251aae4f2146a83c3191b3113246e0",
+     "bytes": 11916,
+     "rows": 552
+    },
+    "summary.json": {
+     "sha256": "695ebd837cc15224fa5289d16e1fbf0ba5583cc2928f8a67f2e12677f3184f55",
+     "bytes": 5529
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_4omini_medical": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "79e3ef426c297ebda893544b99f43d0296a522b53ae783a0f238144e17c385c4",
+     "bytes": 25438,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "0e0d063880144588116dc0b020a4233b4bdabdbabc63aa0924f94aa88a68ede7",
+     "bytes": 746025,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "e2079526a2f0401a18007578bf34ae9d7de305b7927f7a7a83e2a1462d178d0c",
+     "bytes": 11754,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "119e45bc38503e895575e6428f769a13770d8739f2bf336ce34a2fd767a6655e",
+     "bytes": 5567
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_4omini_office": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "f9d01ccc6d82f67864a82f47073fe3f9b826915ce04ab27ee920afd7e1b89853",
+     "bytes": 23627,
+     "rows": 547
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "3510b6a83d3acf10dbd8ae88a852040246e54c62b05f853979584f7790692575",
+     "bytes": 812555,
+     "rows": 547
+    },
+    "scores.jsonl.gz": {
+     "sha256": "ca601a4517db7d3108c72331d473aff2284c5521812981a013af17f77efa0d92",
+     "bytes": 11048,
+     "rows": 547
+    },
+    "summary.json": {
+     "sha256": "51b786afe7d4321f81e110112c52aba5e8df634f6545bfa9c7a073196d9c07e5",
+     "bytes": 5586
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_astra6_medical": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "9a9337808ac096f4e2a2cd422bca244499ba756fb8d485b04efd1171f6eadc22",
+     "bytes": 24150,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "4501ffda1f0686d6e50e2b0d278daafc6145d43ad295e9ce4b733ebc859c6d6b",
+     "bytes": 783801,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "338c6cb8715170475bf1ee02f4f664550a794438811592b95238b9996f8a7778",
+     "bytes": 11178,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "bb2452fe62939bb43f61d8139ee49861e13c27a33c98e4b394569563fac6b091",
+     "bytes": 5456
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_g25fl_education": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "5c07e23d82571c61502582fac7989e19465c152d3b5cb65bd28ec1092bef877d",
+     "bytes": 23904,
+     "rows": 540
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "740ce9ce9f5dc38f822d9d8737e301bb4b4fddd7f43e999203149c503d1f9c87",
+     "bytes": 793415,
+     "rows": 540
+    },
+    "scores.jsonl.gz": {
+     "sha256": "bb1f213d8607385db01ddaaac4b4d7508b9d56d374e3b25cd49bc0cf34af0ee6",
+     "bytes": 11251,
+     "rows": 540
+    },
+    "summary.json": {
+     "sha256": "9894e83b7d78c2764483acf96d8bc06de3aa2139a6a0d55e6eb54be200b3e120",
+     "bytes": 5530
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_g25fl_household": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "4082ffce7b6ecd5acfcca6e5a7f0e8e50ece31731b2fde61c0529a5f57a7ad93",
+     "bytes": 25279,
+     "rows": 552
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "6a83a4b8ea78aba87a4ee66f3afab4699d362478e30a29d57c9aeffa0a0b1869",
+     "bytes": 924117,
+     "rows": 552
+    },
+    "scores.jsonl.gz": {
+     "sha256": "d4d43425a88253a3af4dff75e35556c866460764fb63999f8a16b1a3abdf3b19",
+     "bytes": 12090,
+     "rows": 552
+    },
+    "summary.json": {
+     "sha256": "2c7260254e962024c445ab67c8a10541eb58cbaa189f62eaeafd679bc8985b53",
+     "bytes": 5580
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_g25fl_medical": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "d8d418fab34fa168d1d23e58d0188611614b0a6e6f93b01b50ca7f9142af8a5d",
+     "bytes": 26645,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "22a9f645f4b7c98479fbd4f247ead9d0ad69eb9fa7a61844c6ad085ca7a03f7a",
+     "bytes": 790383,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "4bc8edeb492dbcd0814e3f43fa419f5bf4c586cd0141240552a6db4fa469335c",
+     "bytes": 11609,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "61e195412431bf7ae95b668c5c1c9011c81783ada5c2c19d446d08ed84cce498",
+     "bytes": 5524
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_g25fl_office": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "e22888bc2296efcba20b8489698325515c702595acafa20d18933c42b44ecb2d",
+     "bytes": 23868,
+     "rows": 547
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "04af3e6d54b4877ad4510512623ab48276b39076118190533557dcee2c0c1127",
+     "bytes": 854708,
+     "rows": 547
+    },
+    "scores.jsonl.gz": {
+     "sha256": "25bfaa78a333156856c226ce3fa977357430b270f4d0a7519ff04b93affc8086",
+     "bytes": 11043,
+     "rows": 547
+    },
+    "summary.json": {
+     "sha256": "d436b3daa5cf34f1286e2883e6531d5e9b2455632dc3784479753386eff7ec08",
+     "bytes": 5582
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_g5mini_education": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "095752c36357fc5762bed2c553a149fcb3c0f46e21a2c238cd7383799733e1db",
+     "bytes": 24642,
+     "rows": 540
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "095c1997729e2d09e9f2492de120971c6c3e272bb5db50235c0380d0eea36ac4",
+     "bytes": 853706,
+     "rows": 540
+    },
+    "scores.jsonl.gz": {
+     "sha256": "5aa36d49e42df65aed5e222f519736d1163ec8f208ebbb9c4e967cce4bae83b4",
+     "bytes": 11398,
+     "rows": 540
+    },
+    "summary.json": {
+     "sha256": "3bcc7c18778218d6dd5bbf7b7953a5604675450e72c0bd37d7a770be6ae466a0",
+     "bytes": 5462
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_g5mini_household": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "559620c4d6297a5fe84a3efaf71615b3080190223298dffe570bc98ab9e0e2e4",
+     "bytes": 25441,
+     "rows": 552
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "a9dbaca029334e8bf6d9fb4288d2d1a9702d8e8bb0a08a56f17d99682411abcd",
+     "bytes": 996054,
+     "rows": 552
+    },
+    "scores.jsonl.gz": {
+     "sha256": "0ee23b650db60a5561deb0988c39666e37e7aba47b4be6f8b62925071b766de5",
+     "bytes": 12134,
+     "rows": 552
+    },
+    "summary.json": {
+     "sha256": "385eb58011d29e0b1e9ae3c39d1a8a72820e47e1301b5066e1b19e6ea3180ef8",
+     "bytes": 5582
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_g5mini_medical": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "73da2c42d9120e53049559d383ce00b9f57f46978e07f296205c4daedcd0e5cb",
+     "bytes": 25974,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "3adb2580a11996cda12a7559e270cf90768ca6bcfd74ceaae8831de8e83bcf9b",
+     "bytes": 838193,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "4fb64bcb0e71bbb2e10a802dab6fe5b7ada76fa03bafc7b004249453e4bc5e96",
+     "bytes": 11580,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "5a7eadadae70c8903c0bc0bd6f2c489ad5558be69f4a578c57adf0589244b6da",
+     "bytes": 5544
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_g5mini_office": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "a11f020bf1b1ae4de3d0a3217dd207b177d1e42c3086ce2229300132f8a199ec",
+     "bytes": 24583,
+     "rows": 547
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "2e4ba068f874ed79ae8dc11e35a9a916c57d3541db5d99dd60833b56c1ff5ae0",
+     "bytes": 893499,
+     "rows": 547
+    },
+    "scores.jsonl.gz": {
+     "sha256": "b6b320af6ff3e95265778bdb2fa77a9e9665c78ce7a38bd62ed7f2d771bd4b29",
+     "bytes": 11180,
+     "rows": 547
+    },
+    "summary.json": {
+     "sha256": "2c8dc004e97ca60e9f0750df0d3dfa778533657e96f8ac5612854d64569a35df",
+     "bytes": 5575
+    }
+   },
+   "complete": true
+  },
+  "r3_plur_opus55_medical": {
+   "config": {
+    "unknown_family": true
+   },
+   "artifacts": {
+    "judge_scores.jsonl.gz": {
+     "sha256": "8110016312238ec467a2641c8d41d19a2b206591afb34743bcd7e9c0d6994e3c",
+     "bytes": 24970,
+     "rows": 579
+    },
+    "predictions.jsonl.gz": {
+     "sha256": "0ca1eebec5763f97ab5fa534ee0d0174b1c567cda88515fac91e5f95b1ec03e2",
+     "bytes": 819965,
+     "rows": 579
+    },
+    "scores.jsonl.gz": {
+     "sha256": "1c4b6fcde2f5c7e4dae6c4fefb25fa7e39bf72a2ba6c3baab434648199563e08",
+     "bytes": 11268,
+     "rows": 579
+    },
+    "summary.json": {
+     "sha256": "cabbbcdc4d13580db103b48d80d8a69918ff1c3877b711c6823dee57fd1045e8",
+     "bytes": 5498
     }
    },
    "complete": true
